@@ -29,3 +29,14 @@ jobs:
       run: |
         make apko
         sudo make install
+
+
+  foo:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v4
+    - run: which melange
+    - run: which apko
+    - run: melange --version
+    - run: apko --version
