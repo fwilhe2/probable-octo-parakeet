@@ -30,6 +30,10 @@ jobs:
         make apko
         sudo make install
 
+    - run: which melange
+    - run: which apko
+    - run: melange --version
+    - run: apko --version
 
   foo:
     runs-on: ubuntu-latest
