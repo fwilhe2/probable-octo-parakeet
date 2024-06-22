@@ -1,0 +1,26 @@
+name: CI
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Checkout fwilhe2/melange
+      uses: actions/checkout@v4.1.7
+      with:
+        repository: fwilhe2/melange
+    - name: Checkout fwilhe2/apko
+      uses: actions/checkout@v4.1.7
+      with:
+        repository: fwilhe2/apko
+    - name: Setup Go environment
+      uses: actions/setup-go@v5.0.1 
+    - name: Build
+      run: |
+        find .
+    - name: Build
+      run: |
+        find ..
