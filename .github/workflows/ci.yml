@@ -40,6 +40,7 @@ jobs:
     needs: build
     steps:
     - uses: actions/checkout@v4
+    - run: apt show bubblewrap
     - run: which melange
     - run: which apko
     - run: melange version
