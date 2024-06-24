@@ -36,6 +36,6 @@ jobs:
     - run: which apko
     - run: melange version
     - run: apko version
-    - run: apt show bubblewrap
+    - run: sudo apt-get update && sudo apt-get -y install bubblewrap
     - run: melange build --log-level debug example.yaml
 
