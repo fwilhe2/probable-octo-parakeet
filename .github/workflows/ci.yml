@@ -37,5 +37,5 @@ jobs:
     - run: melange version
     - run: apko version
     - run: sudo apt-get update && sudo apt-get -y install bubblewrap
-    - run: melange build --log-level debug example.yaml
+    - run: melange build --arch x86_64 --keyring-append https://packages.wolfi.dev/os/wolfi-signing.rsa.pub --repository-append https://packages.wolfi.dev/os --log-level debug example.yaml
 
