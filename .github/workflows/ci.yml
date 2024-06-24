@@ -37,5 +37,5 @@ jobs:
     - run: melange version
     - run: apko version
     - run: apt show bubblewrap
-    - run: melange --debug example.yaml
+    - run: melange --log-level debug example.yaml
 
