@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
     - name: Checkout fwilhe2/melange
@@ -32,15 +32,15 @@ jobs:
 
     - run: which melange
     - run: which apko
-    - run: melange --version
-    - run: apko --version
+    - run: melange version
+    - run: apko version
 
   foo:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build
     steps:
     - uses: actions/checkout@v4
     - run: which melange
     - run: which apko
-    - run: melange --version
-    - run: apko --version
+    - run: melange version
+    - run: apko version
