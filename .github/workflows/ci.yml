@@ -8,6 +8,34 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
+    - name: 'Install qemu emulator binaries'
+      shell: bash
+      run: |
+        sudo apt update && sudo apt install -y qemu-user-static
+    - uses: actions/setup-go@93397bea11091df50f3d7e59dc26a7711a8bcfbe # v4.1.0
+      with:
+        go-version: '1.21'
+        check-latest: true
+    - name: 'Install dependencies'
+      shell: bash
+      run: |
+        sudo apt install -y build-essential git jq
+    # TODO: the bubblewrap package available from "apt install"
+    # is outdated and missing newer features such as --clearenv flag,
+    # so instead we download the wolfi .apk and use the binary in there
+    - name: 'Install dependencies (bubblewrap)'
+      shell: bash
+      run: |
+        sudo apt install -y libcap-dev meson ninja-build
+        git clone https://github.com/containers/bubblewrap
+        pushd bubblewrap
+        meson --prefix=/usr -Drequire_userns=true . output
+        cd output
+        ninja
+        sudo ninja install
+        popd
+        rm -rf bubblewrap
+
     - name: Checkout fwilhe2/melange
       uses: actions/checkout@v4.1.7
       with:
@@ -36,6 +64,5 @@ jobs:
     - run: which apko
     - run: melange version
     - run: apko version
-    - run: sudo apt-get update && sudo apt-get -y install bubblewrap
-    - run: melange build --runner docker --arch x86_64 --keyring-append https://packages.wolfi.dev/os/wolfi-signing.rsa.pub --repository-append https://packages.wolfi.dev/os --log-level debug example.yaml
+    - run: melange build --arch x86_64 --keyring-append https://packages.wolfi.dev/os/wolfi-signing.rsa.pub --repository-append https://packages.wolfi.dev/os --log-level debug example.yaml
 
