@@ -64,5 +64,5 @@ jobs:
     - run: which apko
     - run: melange version
     - run: apko version
-    - run: melange build --arch x86_64 --keyring-append https://packages.wolfi.dev/os/wolfi-signing.rsa.pub --repository-append https://packages.wolfi.dev/os --log-level debug example.yaml
+    - run: melange build --runner docker --arch x86_64 --keyring-append https://packages.wolfi.dev/os/wolfi-signing.rsa.pub --repository-append https://packages.wolfi.dev/os --log-level debug example.yaml
 
